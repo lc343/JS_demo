@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <table border="1" id="tab1">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>张三</td>
+                <td>25</td>
+                <td>操作</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>李四</td>
+                <td>29</td>
+                <td>操作</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>陈小</td>
+                <td>20</td>
+                <td>操作</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Blue</td>
+                <td>28</td>
+                <td>操作</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>江一</td>
+                <td>28</td>
+                <td>操作</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>王二</td>
+                <td>26</td>
+                <td>操作</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>李二</td>
+                <td>26</td>
+                <td>操作</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    姓名：<input type="text" id="txt1">
+    年龄：<input type="text" id="txt2">
+    <input type="button" id="btn1" value="添加"/>
+    <!--<input type="button" id="btn2" value="删除"/>-->
+    <input type="button" id="btn3" value="查找"/>
+    <input type="button" id="btn4" value="筛选"/>
+    <input type="button" id="btn5" value="排序"/>
+
+
+    <script>
+    window.onload=function(){
+        var oTab=document.getElementById("tab1");
+        var oName=document.getElementById("txt1");
+        var oAge=document.getElementById("txt2");
+        var oBt=document.getElementById("btn1");//添加
+       // var oBt2=document.getElementById("btn2");//删除
+        var oBt3=document.getElementById("btn3");//查找
+        var oBt4=document.getElementById("btn4");//筛选
+        var oBt5=document.getElementById("btn5");//年龄排序
+        var id=oTab.tBodies[0].rows.length+1;
+
+        //隔行变色,鼠标移入高亮
+        for(var i=0;i<oTab.tBodies[0].rows.length;i++){
+            if(i%2==0){
+                oTab.tBodies[0].rows[i].style.background="#ccc";
+            }
+            else{
+                oTab.tBodies[0].rows[i].style.background=" ";
+            }
+            oTab.tBodies[0].rows[i].onmouseover=function(){
+                oldColor= this.style.background;
+                this.style.background="blue";
+            };
+            oTab.tBodies[0].rows[i].onmouseout=function(){
+                this.style.background=oldColor;
+            };
+
+        }
+        //添加数据，删除数据
+        oBt.onclick= function inStr(){
+            var oTr=document.createElement("tr");
+
+            var oTd=document.createElement("td");
+            oTd.innerHTML=id++;
+            oTr.appendChild(oTd);
+
+            var oTd=document.createElement("td");
+            oTd.innerHTML=oName.value;
+            oTr.appendChild(oTd);
+
+            var oTd=document.createElement("td");
+            oTd.innerHTML=oAge.value;
+            oTr.appendChild(oTd);
+
+            var oTd=document.createElement("td");
+            oTd.innerHTML="<a href='javascript:;'>删除</a>";
+            oTr.appendChild(oTd);
+
+            var aA=oTd.getElementsByTagName("a");
+                aA[0].onclick=function(){
+                oTab.tBodies[0].removeChild(this.parentNode.parentNode);
+            };
+
+            oTab.tBodies[0].appendChild(oTr);
+        };
+
+        //搜索姓名,忽略大小写，模糊查找,多关键字查找
+        oBt3.onclick=function search(value){
+            var len=oTab.tBodies[0].rows.length;
+            for(var i=0;i<len;i++){
+                var sTab=oTab.tBodies[0].rows[i].cells[1].innerHTML.toLowerCase();
+                var sTab1=oTab.tBodies[0].rows[i].cells[2].innerHTML;
+                var sTxt=oName.value.toLowerCase();
+                var sTxt1=oAge.value;
+                if(sTxt){//名字查找
+                    var arr=sTxt.split(' ');//多关键字查找
+                    oTab.tBodies[0].rows[i].style.background='';
+                    for(var j=0;j<arr.length;j++){
+                        if(sTab.search(arr[j])!=-1){//模糊查找
+                            oTab.tBodies[0].rows[i].style.background="yellow";
+                        }
+                    }
+                }
+                if(sTxt1){//年龄查找
+                    var arr1=sTxt1.split(' ');//多关键字查找
+                    oTab.tBodies[0].rows[i].style.background='';
+                    for(var k=0;k<arr1.length;k++){
+                        if(sTab1.search(arr1[k])!=-1){//模糊查找
+                            oTab.tBodies[0].rows[i].style.background="yellow";
+                        }
+                    }
+                }
+            }
+        };
+        //筛选
+        oBt4.onclick=function shaiXuan(value){
+            for(var i=0;i<oTab.tBodies[0].rows.length;i++) {
+                var sTab = oTab.tBodies[0].rows[i].cells[1].innerHTML.toLowerCase();
+                var sTab1 = oTab.tBodies[0].rows[i].cells[2].innerHTML;
+                var sTxt = oName.value.toLowerCase();
+                var sTxt1 = oAge.value;
+                if (sTxt) {//名字筛选
+                    var arr = sTxt.split(' ');//名字 多关键字查找
+                    oTab.tBodies[0].rows[i].style.display = 'none';
+                    for (var j = 0; j < arr.length; j++) {
+                        if (sTab.search(arr[j]) != -1) {//模糊查找
+                            oTab.tBodies[0].rows[i].style.display = 'block';
+                        }
+                    }
+                }
+                if (sTxt1) {
+                    var arr1 = sTxt1.split(' ');//年龄 多关键字查找
+                    oTab.tBodies[0].rows[i].style.display = 'none';
+                    for (var k = 0; k < arr1.length; k++) {
+                        if (sTab1.search(arr1[k]) != -1) {//模糊查找
+                            oTab.tBodies[0].rows[i].style.display = 'block';
+                        }
+                    }
+                }
+            }
+            }
+        //年龄排序
+        oBt5.onclick=function(){
+          var arr=[];
+            for(var i=0;i<oTab.tBodies[0].rows.length;i++){
+                arr[i]=oTab.tBodies[0].rows[i];
+            }
+            arr.sort(function(tr1,tr2){
+                var n1=parseInt(tr1.cells[2].innerHTML);
+                var n2=parseInt(tr2.cells[2].innerHTML);
+                return n1-n2;
+            });
+            for(var i=0;i<arr.length;i++){
+                oTab.tBodies[0].appendChild(arr[i]);
+            }
+
+        };
+    };
+
+    </script>
+
+</body>
+</html>

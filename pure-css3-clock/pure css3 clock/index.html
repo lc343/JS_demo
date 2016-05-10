@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>纯CSS3打造精致时钟（不含任何图片和js）Demo | 觉唯前端</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.title {
+	background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #505050), color-stop(100%, #383838));
+	background: -webkit-linear-gradient(#505050, #383838);
+	background: -moz-linear-gradient(#505050, #383838);
+	background: -o-linear-gradient(#505050, #383838);
+	background: linear-gradient(#505050, #383838);
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	box-shadow: inset 0 1px 0 #858585, 0 2px 2px rgba(0, 0, 0, 0.4);
+	text-align: center;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	padding: 5px 0;
+}
+.title a {
+	color: #FFF;
+	text-decoration: none;
+	font-size: 12px;
+	line-height: 24px;
+}
+.title_l {
+	float: left;
+	margin-left: 10px;
+}
+.title_r {
+	float: right;
+	margin-right: 10px;
+}
+#ads_box {
+	position: absolute;
+	right: 20px;
+	top: 54px;
+	width: 274px;
+	z-index: 100000;
+}
+#ads_box .ads {
+	background: #707070;
+	border-color: #FFFFFF;
+	border-radius: 4px;
+	box-shadow: 0 0 10px #505050;
+	overflow: hidden;
+	padding: 10px;
+}
+.adsborder {
+	height: 250;
+	width: 250px;
+	border: 2px solid #8a8a8a;
+}
+#ads_aplink {
+	color: #FFF;
+	font-size: 12px;
+	line-height: 24px;
+	height: 24px;
+	position: relative;
+	margin-bottom: 5px;
+}
+#ads_close {
+	background: url(http://www.jiawin.com/demos/close.png) no-repeat scroll 0 0 transparent;
+	border: medium none !important;
+	height: 20px;
+	overflow: hidden;
+	position: absolute;
+	text-decoration: none !important;
+	top: 0px;
+	right: 0;
+	width: 20px;
+}
+#ads_close:hover {
+	background: url(http://www.jiawin.com/demos/close.png) no-repeat scroll 0 -20px transparent;
+}
+</style>
+</head>
+<body>
+<div class="title"><a target="_blank" class="title_l" href="http://www.jiawin.com">觉唯前端 &gt;&gt;</a><a target="_blank" class="title_r" href="http://www.jiawin.com/pure-css3-clock/">&lt;&lt; 返回文章：纯CSS3打造精致时钟（不含任何图片和js）</a></div>
+<div id="watch">
+  <div class="frame-face"></div>
+  <ul class="minute-marks">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <div class="digital-wrap">
+    <ul class="digit-hours">
+      <li>23</li>
+      <li>00</li>
+      <li>01</li>
+      <li>02</li>
+      <li>03</li>
+      <li>04</li>
+      <li>05</li>
+      <li>06</li>
+      <li>07</li>
+      <li>08</li>
+      <li>09</li>
+      <li>10</li>
+      <li>11</li>
+      <li>12</li>
+      <li>13</li>
+      <li>14</li>
+      <li>15</li>
+      <li>16</li>
+      <li>17</li>
+      <li>18</li>
+      <li>19</li>
+      <li>20</li>
+      <li>21</li>
+      <li>22</li>
+    </ul>
+    <ul class="digit-minutes">
+      <li>10</li>
+      <li>11</li>
+      <li>12</li>
+      <li>13</li>
+      <li>14</li>
+      <li>15</li>
+      <li>16</li>
+      <li>17</li>
+      <li>18</li>
+      <li>19</li>
+      <li>20</li>
+      <li>21</li>
+      <li>22</li>
+      <li>23</li>
+      <li>24</li>
+      <li>25</li>
+      <li>26</li>
+      <li>27</li>
+      <li>28</li>
+      <li>29</li>
+      <li>30</li>
+      <li>31</li>
+      <li>32</li>
+      <li>33</li>
+      <li>34</li>
+      <li>35</li>
+      <li>36</li>
+      <li>37</li>
+      <li>38</li>
+      <li>39</li>
+      <li>40</li>
+      <li>41</li>
+      <li>42</li>
+      <li>43</li>
+      <li>44</li>
+      <li>45</li>
+      <li>46</li>
+      <li>47</li>
+      <li>48</li>
+      <li>49</li>
+      <li>50</li>
+      <li>51</li>
+      <li>52</li>
+      <li>53</li>
+      <li>54</li>
+      <li>55</li>
+      <li>56</li>
+      <li>57</li>
+      <li>58</li>
+      <li>59</li>
+      <li>00</li>
+      <li>01</li>
+      <li>02</li>
+      <li>03</li>
+      <li>04</li>
+      <li>05</li>
+      <li>06</li>
+      <li>07</li>
+      <li>08</li>
+      <li>09</li>
+    </ul>
+    <ul class="digit-seconds">
+      <li>20</li>
+      <li>21</li>
+      <li>22</li>
+      <li>23</li>
+      <li>24</li>
+      <li>25</li>
+      <li>26</li>
+      <li>27</li>
+      <li>28</li>
+      <li>29</li>
+      <li>30</li>
+      <li>31</li>
+      <li>32</li>
+      <li>33</li>
+      <li>34</li>
+      <li>35</li>
+      <li>36</li>
+      <li>37</li>
+      <li>38</li>
+      <li>39</li>
+      <li>40</li>
+      <li>41</li>
+      <li>42</li>
+      <li>43</li>
+      <li>44</li>
+      <li>45</li>
+      <li>46</li>
+      <li>47</li>
+      <li>48</li>
+      <li>49</li>
+      <li>50</li>
+      <li>51</li>
+      <li>52</li>
+      <li>53</li>
+      <li>54</li>
+      <li>55</li>
+      <li>56</li>
+      <li>57</li>
+      <li>58</li>
+      <li>59</li>
+      <li>00</li>
+      <li>01</li>
+      <li>02</li>
+      <li>03</li>
+      <li>04</li>
+      <li>05</li>
+      <li>06</li>
+      <li>07</li>
+      <li>08</li>
+      <li>09</li>
+      <li>10</li>
+      <li>11</li>
+      <li>12</li>
+      <li>13</li>
+      <li>14</li>
+      <li>15</li>
+      <li>16</li>
+      <li>17</li>
+      <li>18</li>
+      <li>19</li>
+    </ul>
+  </div>
+  <ul class="digits">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+    <li>10</li>
+    <li>11</li>
+    <li>12</li>
+  </ul>
+  <div class="hours-hand"></div>
+  <div class="minutes-hand"></div>
+  <div class="seconds-hand"></div>
+</div>
+<p class="footer"><a href="http://www.jiawin.com/">Make by @www.jiawin.com</a></p>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div id="myDiv">Click here.</div>
+    <ul id="myMenu" style="width: 100px;height: 100px; visibility:hidden;background: lightyellow;">
+        <li><a href="http://www.baidu.com">百度</a></li>
+        <li><a href="http://www.taobao.com">淘宝</a></li>
+        <li><a href="http://www.sogou.com">搜狗</a></li>
+    </ul>
+    <script src="EventUtil.js"></script>
+    <script>
+      EventUtil.addHandler(window,"load",function(event){
+         var div=document.getElementById("myDiv");
+          EventUtil.addHandler(div,"contextmenu",function(event){
+             var event=EventUtil.getEvent(event);
+              EventUtil.preventDefault(event);
+
+              var menu=document.getElementById("myMenu") ;
+              menu.style.left=event.clientX+'px';
+              menu.style.top=event.clientY+'px';
+              menu.style.visibility='visible';
+          });
+          EventUtil.addHandler(document,"click",function(event){
+              document.getElementById("myMenu").style.visibility="hidden";
+          })
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>控制div透明度</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        #myDiv{
+            width: 10px;
+            height: 10px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #parent{
+            background: #cccccc;
+            width: 10px;
+            height: 500px;
+            position: relative;
+        }
+        #div3{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 50px;
+            left: 100px;
+            background: green;
+            filter:alpha(opacity:0);
+            opacity:0;
+
+        }
+
+    </style>
+</head>
+<body>
+    <div id="parent">
+        <div id="myDiv"></div>
+    </div>
+    <div id="div3"></div>
+    <script src="EventUtil.js"></script>
+    <script>
+        window.onload=function(){
+            var oDiv=document.getElementById("myDiv");
+            var oParent=document.getElementById("parent");
+            var oDiv3=document.getElementById("div3");
+            var numY=0;
+            
+            oDiv.onmousedown=function(event){
+                event=EventUtil.getEvent(event);
+                numY=event.clientY-oDiv.offsetTop;
+                document.onmousemove=function(event){
+                   event=EventUtil.getEvent(event);
+                    var t=event.clientY-numY;
+
+                    if(t<0){
+                        t=0;
+                    }
+                    else if(t>oParent.offsetHeight-oDiv.offsetHeight){
+                        t=oParent.offsetHeight-oDiv.offsetHeight;
+                    }
+
+                    oDiv.style.top=t+'px';
+
+                    var scale=t/(oParent.offsetHeight-oDiv.offsetHeight);
+                   document.title=scale;
+                    oDiv3.style.filter='alpha(opacity:'+scale*100+')';
+                    oDiv3.style.opacity=scale;
+
+                };
+                document.onmouseup=function(){
+
+                    document.onmousemove=null;
+                    document.onmouseup=null;
+                };
+                return false;
+
+            };
+        };
+    </script>
+</body>
+</html>

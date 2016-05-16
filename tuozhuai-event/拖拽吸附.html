@@ -48,14 +48,14 @@
                     if(l<50){
                         l=0;
                     }
-                    else if(l>oDiv1.clientWidth-oDiv.offsetWidth){
-                        l=oDiv1.clientWidth-oDiv.offsetWidth;
+                    else if(l>oDiv1.offsetWidth-oDiv.offsetWidth){
+                        l=oDiv1.offsetWidth-oDiv.offsetWidth;
                     }
                     if(t<50){
                         t=0;
                     }
-                    else if(t>oDiv1.clientHeight-oDiv.offsetHeight){
-                        t=oDiv1.clientHeight-oDiv.offsetHeight;
+                    else if(t>oDiv1.offsetHeight-oDiv.offsetHeight){
+                        t=oDiv1.offsetHeight-oDiv.offsetHeight;
                     }
                     oDiv.style.left=l+'px';
                     oDiv.style.top=t+'px';

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>带框拖拽div</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        #myDiv{
+            border: 1px solid black;
+            width: 50px;
+            height: 50px;
+            background: red;
+            position: absolute;
+        }
+        .box{
+            border: 1px dashed black;
+            position:absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="myDiv"></div>
+    <script src="EventUtil.js"></script>
+    <script>
+        window.onload=function(){
+            var oDiv=document.getElementById("myDiv");
+
+            var numX=0;
+            var numY=0;
+            oDiv.onmousedown=function(event){
+                event=EventUtil.getEvent(event);
+                var oDiv1=document.createElement('div');//创建一个虚框div
+                oDiv1.className='box';
+                oDiv1.style.width=oDiv.offsetWidth-2+'px';
+                oDiv1.style.height=oDiv.offsetHeight-2+'px';
+                oDiv1.style.left=oDiv.offsetLeft+'px';
+                oDiv1.style.top=oDiv.offsetTop+'px';
+
+                document.body.appendChild(oDiv1);
+
+                numX=event.clientX-oDiv.offsetLeft;
+                numY=event.clientY-oDiv.offsetTop;
+                document.onmousemove=function(event){
+                   event=EventUtil.getEvent(event);
+                    var l=event.clientX-numX;
+                    var t=event.clientY-numY;
+
+                    if(l<0){
+                        l=0;
+                    }
+                    else if(l>document.documentElement.clientWidth-oDiv.offsetWidth){
+                        l=document.documentElement.clientWidth-oDiv.offsetWidth;
+                    }
+                    if(t<0){
+                        t=0;
+                    }
+                    else if(t>document.documentElement.clientHeight-oDiv.offsetHeight){
+                        t=document.documentElement.clientHeight-oDiv.offsetHeight;
+                    }
+                    oDiv1.style.left=l+'px';
+                    oDiv1.style.top=t+'px';
+                };
+                document.onmouseup=function(){
+
+                    document.onmousemove=null;
+                    document.onmouseup=null;
+
+                    oDiv.style.left=oDiv1.offsetLeft+'px';
+                    oDiv.style.top=oDiv1.offsetTop+'px';
+
+                    document.body.removeChild(oDiv1);
+                };
+            };
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拖拽div</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        #myDiv{
+            border: 1px solid black;
+            width: 50px;
+            height: 50px;
+            background: red;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+    aaaaaaaaaaaaaaaaaaaaaaa
+    <div>
+        aaaaaaaaaaaaaaaaaaaaaaa
+        <div id="myDiv">aaaaa</div>a
+    </div>
+
+    <script src="EventUtil.js"></script>
+    <script>
+        //移动时不会选中文字
+        window.onload=function() {
+            var oDiv = document.getElementById("myDiv");
+            var numX = 0;
+            var numY = 0;
+            oDiv.onmousedown = function (event) {
+                event = EventUtil.getEvent(event);
+                numX = event.clientX - oDiv.offsetLeft;
+                numY = event.clientY - oDiv.offsetTop;
+
+                function mouseMove(event) {
+                    event = EventUtil.getEvent(event);
+                    var l = event.clientX - numX;
+                    var t = event.clientY - numY;
+
+                    if (l < 0) {
+                        l = 0;
+                    }
+                    else if (l > document.documentElement.clientWidth - oDiv.offsetWidth) {
+                        l = document.documentElement.clientWidth - oDiv.offsetWidth;
+                    }
+                    if (t < 0) {
+                        t = 0;
+                    }
+                    else if (t > document.documentElement.clientHeight - oDiv.offsetHeight) {
+                        t = document.documentElement.clientHeight - oDiv.offsetHeight;
+                    }
+                    oDiv.style.left = l + 'px';
+                    oDiv.style.top = t + 'px';
+                }
+
+                function mouseUp(){
+                    this.onmousemove = null;
+                    this.onmouseup = null;
+                    if(oDiv.releaseCapture){
+                        oDiv.releaseCapture();
+                    }
+                }
+                if (oDiv.setCapture) {
+                    //IE
+                    oDiv.onmousemove = mouseMove;
+                    oDiv.onmouseup = mouseUp;
+                    oDiv.setCapture;
+                }
+                else {
+                    //FF Chrome
+                    document.onmousemove =mouseMove;
+                    document.onmouseup =mouseUp;
+                }
+                return false;
+            };
+        };
+
+    </script>
+</body>
+</html>

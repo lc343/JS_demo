@@ -7,4 +7,5 @@
 6.pure css3 clock文件 转载纯CSS3打造精致时钟<br>
 7.ContextEvent1.html Web上自定义上下文菜单的基本结构 <br>
 8.tuozhuai-event文件 拖拽事件，带框拖拽，拖拽吸附，滚动条控制文字滚动，控制div透明度等
+9.JSLoanCalulator文件 JavaScript权威指南第一章的借贷的小例子
 
